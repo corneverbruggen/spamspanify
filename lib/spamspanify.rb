@@ -39,7 +39,7 @@ module Spamspanify
   #   SpamSpam markup
   def mailto_links input, paranoia_level = 1
     input.gsub(MAILTO_REGEXP) do |mailto|
-      create_markup(mailto[EMAIL_REGEXP], paranoia_level)
+      create_markup(mailto[EMAIL_REGEXP], paranoia_level, mailto.split(">")[1].split("<")[0])
     end
   end
 
@@ -47,18 +47,20 @@ module Spamspanify
   #
   # @param [String] email_address
   # @param [Integer] paranoia_level
+  # @param [String] mailto_link_text
   # @return [String] SpamSpan HTML markup
   # @raise [Spamspanify::ParanoiaLevelNotSupportedError] when a not supported
   #   paranoia level is requested
-  def create_markup email_address, paranoia_level = 1
+  def create_markup email_address, paranoia_level = 1, mailto_link_text = nil
+    mailto_link_text = nil if (email_address == mailto_link_text)
     user, domain = email_address.split("@")
     case paranoia_level
     when 1
       "<span class='spamspan'><span class='u'>#{ user }</span>@<span class='d'>"\
-        "#{ domain }</span></span>"
+        "#{ domain }</span>#{ "(<span class='t'>#{ mailto_link_text }</span>)" if mailto_link_text }</span>"
     when 3
       "<span class='spamspan'><span class='u'>#{ undotify(user) }</span> [at] "\
-        "<span class='d'>#{ undotify(domain) }</span></span>"
+        "<span class='d'>#{ undotify(domain) }</span>#{ "(<span class='t'>#{ mailto_link_text }</span>)" if mailto_link_text }</span>"
     else
       Raise ParanoiaLevelNotSupportError
     end

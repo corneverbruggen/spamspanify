@@ -20,8 +20,15 @@ describe Spamspanify do
       "'u'>major.seven</span>@<span class='d'>a-flat.com</span></span>."
   end
 
-  it "should transform html <a href='mailto:..> links as well", focus: true do
-    s = "Email <a href='mailto:b.flat@minor.com'>B.Flat</a> please."
-    expect(s.spamspanify(1)).to eq "Email <span class='spamspan'><span class='u'>b.flat</span>@<span class='d'>minor.com</span></span> please."
+  describe "should transform html <a href='mailto:..> links as well" do
+    it "when link text is email address" do
+      s = "Email <a href='mailto:b.flat@minor.com'>b.flat@minor.com</a> please."
+      expect(s.spamspanify(1)).to eq "Email <span class='spamspan'><span class='u'>b.flat</span>@<span class='d'>minor.com</span></span> please."
+    end
+
+    it "using the link text as link text again" do
+      s = "Email <a href='mailto:b.flat@minor.com'>B.Flat</a> please."
+      expect(s.spamspanify(1)).to eq "Email <span class='spamspan'><span class='u'>b.flat</span>@<span class='d'>minor.com</span>(<span class='t'>B.Flat</span>)</span> please."
+    end
   end
 end
