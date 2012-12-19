@@ -25,7 +25,19 @@ Or install it yourself as:
 
 ## Usage
 
-Simply call the {String#spamspanify} method on a string. 
+Simply call the spamspanify method on a string:
+
+    text = "Feel free to <a href='mailto:info@example.com'>send us an email</a>"
+
+    # Default paranoia level (1):
+    text.spamspanify
+    # => "Feel free to <span class='spamspan'><span class='u'>info</span>@<span class='d'>example.com</span>(<span class='t'>send us an email</span>)</span>"
+
+    # Paranoia level 3:
+    text.spamspanify(3)
+    # => "Feel free to <span class='spamspan'><span class='u'>info</span> [at] <span class='d'>example [dot] com</span>(<span class='t'>send us an email</span>)</span>"
+
+
 
 ## Contributing
 
