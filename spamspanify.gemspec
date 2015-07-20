@@ -7,14 +7,14 @@ Gem::Specification.new do |gem|
   gem.name          = "spamspanify"
   gem.version       = Spamspanify::VERSION
   gem.authors       = ["Corné Verbruggen"]
-  gem.email         = ["corne@g-majeur.nl"]
+  gem.email         = ["info@corneverbruggen.com"]
   gem.description   = %q{
     Spamspanify extends the String class with a spamspanify method that
     replaces all email addresses in a string with HTML markup that can be
     handled by the SpamSpan javascript library.
   }
   gem.summary       = "Transforms email addresses in a string into SpamSpam markup"
-  gem.homepage      = "https://github.com/g-majeur/spamspanify"
+  gem.homepage      = "https://github.com/corneverbruggen/spamspanify"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
