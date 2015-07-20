@@ -4,7 +4,7 @@ require "spamspanify/exceptions"
 
 module Spamspanify
   # TODO split EMAIL_REGEXP in separate local and domain parts
-  EMAIL_REGEXP = /([\w|&|\-\.])+@([\w|\-\.])+\w+/
+  EMAIL_REGEXP = /([\w|(&amp;)|&|\-\.])+@([\w|\-\.])+\w+/
   MAILTO_REGEXP = /<a\s*href=(\'|\")mailto:#{ EMAIL_REGEXP }(\'|\").*<\/a>/
 
   module_function

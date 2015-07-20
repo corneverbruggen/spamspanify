@@ -26,6 +26,12 @@ describe Spamspanify do
       "'u'>major&minor.seven</span>@<span class='d'>a-flat.com</span></span>."
   end
 
+  it "allows an excaped ampersand in the local part of an email address" do
+    s = "Email major&amp;minor.seven@a-flat.com."
+    expect(s.spamspanify).to eq "Email <span class='spamspan'><span class="\
+      "'u'>major&amp;minor.seven</span>@<span class='d'>a-flat.com</span></span>."
+  end
+
   describe "should transform html <a href='mailto:..> links as well" do
     it "when link text is email address" do
       s = "Email <a href='mailto:b.flat@minor.com'>b.flat@minor.com</a> please."
