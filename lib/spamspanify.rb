@@ -3,7 +3,8 @@ require "spamspanify/core_ext/string"
 require "spamspanify/exceptions"
 
 module Spamspanify
-  EMAIL_REGEXP = /([\w|\-\.])+@([\w|\-\.])+\w+/
+  # TODO split EMAIL_REGEXP in separate local and domain parts
+  EMAIL_REGEXP = /([\w|&|\-\.])+@([\w|\-\.])+\w+/
   MAILTO_REGEXP = /<a\s*href=(\'|\")mailto:#{ EMAIL_REGEXP }(\'|\").*<\/a>/
 
   module_function
